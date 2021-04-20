@@ -3,8 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Todo;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-class TodoRequest extends FormRequest
+class TodoRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +16,10 @@ class TodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if ($this->method() == Request::METHOD_POST)
+            return true;
+        $todo = $this->route('todo');
+        return auth()->user()->id == $todo->user_id;
     }
 
     /**
@@ -24,7 +30,9 @@ class TodoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'todo' => 'requaired|string|max:255',
+            'label' => 'nullable|string',
+            'done' => 'nullable|boolean',
         ];
     }
 }

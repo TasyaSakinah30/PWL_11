@@ -3,9 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Todo;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Illuminate\Http\Request;
 
 class TodoRequest extends ApiRequest
 {

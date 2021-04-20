@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class RegisterRequest extends ApiRequest
 {
     /**
@@ -24,7 +27,7 @@ class RegisterRequest extends ApiRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:6'
         ];
     }
 }
